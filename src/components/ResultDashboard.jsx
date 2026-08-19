@@ -34,10 +34,6 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     }
   }, [userData, testResults, navigate, selectedMode, onClose, initialAnalysis]);
 
-  if (!analysis) return null;
-
-  const { recs } = analysis;
-
   const handleDownloadPDF = async () => {
     setIsExporting(true);
     // Tunggu DOM update dari isExporting
@@ -60,7 +56,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       margin:       10,
       filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
       image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff', windowWidth: 1000 }, // Putih murni dan paksa windowWidth
+      html2canvas:  { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff', windowWidth: 1000 },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
     };
@@ -84,6 +80,10 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       return () => clearTimeout(timer);
     }
   }, [autoDownload, analysis]);
+
+  if (!analysis) return null;
+
+  const { recs } = analysis;
 
   // Expert Radar Chart Component
   const renderRadarChart = (data, title, icon, color, expertName, expertRole, expertImageMode) => {
