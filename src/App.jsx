@@ -1,4 +1,11 @@
 import React, { useState, Component } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { Compass, Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
+import TestEngine from './components/TestEngine';
+import ResultDashboard from './components/ResultDashboard';
+import AdminDashboard from './components/AdminDashboard';
+import { saveResultToDB } from './utils/db';
+import { calculateScores, getRecommendations } from './utils/recommendationEngine';
 
 class ErrorBoundary extends Component {
   constructor(props) { super(props); this.state = { hasError: false, error: null }; }
@@ -14,10 +21,6 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { Compass, Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
-import TestEngine from './components/TestEngine';
 
 function LandingPage({ onSelectMode }) {
   const navigate = useNavigate();
@@ -183,10 +186,6 @@ function RegisterPage({ onStartTest }) {
   );
 }
 
-import ResultDashboard from './components/ResultDashboard';
-import AdminDashboard from './components/AdminDashboard';
-import { saveResultToDB } from './utils/db';
-import { calculateScores, getRecommendations } from './utils/recommendationEngine';
 
 function MainApp() {
   const navigate = useNavigate();
