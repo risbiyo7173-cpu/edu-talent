@@ -45,11 +45,18 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
     const originalMargin = element.style.margin;
+    const originalPosition = element.style.position;
+    const originalLeft = element.style.left;
+    const originalTop = element.style.top;
     
-    // Paksa ukuran optimal (800px) agar pas di kertas A4 Portrait tanpa terpotong
+    // Paksa ukuran optimal (800px) dan posisikan paksa di pojok kiri atas
+    // Ini memastikan html2canvas tidak terpengaruh oleh margin browser atau ukuran layar
     element.style.width = '800px';
     element.style.maxWidth = '800px';
-    element.style.margin = '0 auto'; // Pusatkan secara horizontal agar simetris
+    element.style.margin = '0'; 
+    element.style.position = 'absolute';
+    element.style.left = '0';
+    element.style.top = '0';
     
     // Aktifkan mode cetak (teks hitam, background putih)
     element.classList.add('pdf-export-mode');
@@ -79,6 +86,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     element.style.width = originalWidth;
     element.style.maxWidth = originalMaxWidth;
     element.style.margin = originalMargin;
+    element.style.position = originalPosition;
+    element.style.left = originalLeft;
+    element.style.top = originalTop;
     
     setIsExporting(false);
   };
@@ -365,7 +375,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {recs.roadmap.map((step, idx) => (
-            <div key={idx} style={{ display: 'flex', gap: '20px' }}>
+            <div key={idx} style={{ display: 'flex', gap: '20px', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--accent)' }}>
                   {idx + 1}
