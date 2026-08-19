@@ -1,4 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
+
+class ErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { hasError: false, error: null }; }
+  static getDerivedStateFromError(error) { return { hasError: true, error }; }
+  render() {
+    if (this.state.hasError) {
+      return <div style={{padding: '2rem', color: 'white', background: 'red'}}>
+        <h2>Something went wrong.</h2>
+        <pre>{this.state.error.toString()}</pre>
+        <pre>{this.state.error.stack}</pre>
+      </div>;
+    }
+    return this.props.children;
+  }
+}
+
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { Compass, Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
 import TestEngine from './components/TestEngine';
@@ -202,13 +218,15 @@ function MainApp() {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage onSelectMode={handleSelectMode} />} />
-      <Route path="/register" element={<RegisterPage onStartTest={handleStartTest} />} />
-      <Route path="/test" element={<TestEngine selectedMode={selectedMode} onComplete={handleTestComplete} />} />
-      <Route path="/result" element={<ResultDashboard userData={userData} testResults={testResults} selectedMode={selectedMode} />} />
-      <Route path="/admin" element={<AdminDashboard />} />
-    </Routes>
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<LandingPage onSelectMode={handleSelectMode} />} />
+        <Route path="/register" element={<RegisterPage onStartTest={handleStartTest} />} />
+        <Route path="/test" element={<TestEngine selectedMode={selectedMode} onComplete={handleTestComplete} />} />
+        <Route path="/result" element={<ResultDashboard userData={userData} testResults={testResults} selectedMode={selectedMode} />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
+    </ErrorBoundary>
   );
 }
 
