@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { Compass, Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
+import { Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
 import TestEngine from './components/TestEngine';
 import ResultDashboard from './components/ResultDashboard';
 import AdminDashboard from './components/AdminDashboard';

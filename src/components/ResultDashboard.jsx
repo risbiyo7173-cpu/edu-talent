@@ -440,7 +440,3 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
   );
 }
 
-// Dummy icon component since BrainCircuit wasn't imported in this file
-function BrainCircuit({ color }) {
-  return <Star color={color} />;
-}
