@@ -44,19 +44,29 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     // Simpan style asli
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
+    const originalMargin = element.style.margin;
     
-    // Paksa ukuran desktop (1000px) agar layout tidak memanjang seperti di layar HP
-    element.style.width = '1000px';
-    element.style.maxWidth = '1000px';
+    // Paksa ukuran optimal (800px) agar pas di kertas A4 Portrait tanpa terpotong
+    element.style.width = '800px';
+    element.style.maxWidth = '800px';
+    element.style.margin = '0 auto'; // Pusatkan secara horizontal agar simetris
     
     // Aktifkan mode cetak (teks hitam, background putih)
     element.classList.add('pdf-export-mode');
 
     const opt = {
-      margin:       10,
+      margin:       [10, 10, 10, 10], // Margin simetris: [atas, kiri, bawah, kanan] dalam mm
       filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
       image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff', windowWidth: 1000 },
+      html2canvas:  { 
+        scale: 2, 
+        useCORS: true, 
+        logging: false, 
+        backgroundColor: '#ffffff', 
+        windowWidth: 800,
+        scrollX: 0,
+        scrollY: 0
+      },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
     };
@@ -68,6 +78,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     element.classList.remove('pdf-export-mode');
     element.style.width = originalWidth;
     element.style.maxWidth = originalMaxWidth;
+    element.style.margin = originalMargin;
     
     setIsExporting(false);
   };
