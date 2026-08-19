@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { calculateScores, getRecommendations, getNarrative } from '../utils/recommendationEngine';
-import { Trophy, Star, BookOpen, GraduationCap, Briefcase, RefreshCw, Printer, UserCircle2 } from 'lucide-react';
+import { Trophy, Star, BookOpen, GraduationCap, Briefcase, RefreshCw, Printer, UserCircle2, BrainCircuit } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 import html2pdf from 'html2pdf.js';
 
