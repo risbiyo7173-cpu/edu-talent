@@ -320,6 +320,13 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
           </div>
         )}
 
+        {(selectedMode === 'comprehensive' || selectedMode === 'iq') && (
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
+            <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Pilar Kognitif (IQ)</h4>
+            <h2 style={{ fontSize: '2rem', marginTop: '10px', color: '#8b5cf6' }}>{recs.topIQ}</h2>
+          </div>
+        )}
+
         {selectedMode === 'interest' && (
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Fokus Minat</h4>
@@ -391,6 +398,17 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
               "var(--secondary)",
               "E.K. Strong Jr.",
               "Perintis Tes Inventori Minat"
+            )
+          }
+
+          {(selectedMode === 'comprehensive' || selectedMode === 'iq') && 
+            renderRadarChart(
+              recs.sortedIQ, 
+              "IQ (Kognitif)", 
+              <BrainCircuit size={20} color="#8b5cf6" />, 
+              "#8b5cf6",
+              "David Wechsler",
+              "Pakar Psikologi Tes Kognitif & IQ"
             )
           }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { Compass, Brain, Target, Sparkles, ArrowRight, Lock } from 'lucide-react';
+import { Compass, Brain, Target, Sparkles, ArrowRight, Lock, Lightbulb } from 'lucide-react';
 import TestEngine from './components/TestEngine';
 
 function LandingPage({ onSelectMode }) {
@@ -55,13 +55,21 @@ function LandingPage({ onSelectMode }) {
             </div>
           </button>
 
+          <button className="glass-card animate-fade-in animate-delay-4" onClick={() => onSelectMode('iq')} style={{ cursor: 'pointer', border: '1px solid #8b5cf6', background: 'rgba(139, 92, 246, 0.05)', flex: '1 1 250px', maxWidth: '300px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+              <Lightbulb size={36} color="#8b5cf6" />
+              <h3 style={{ fontSize: '1.1rem' }}>4. Tes IQ (Kognitif)</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Mengukur logika, spasial, dan memori kerja.</p>
+            </div>
+          </button>
+
         </div>
 
         <div style={{ position: 'relative', display: 'inline-block', width: '100%', maxWidth: '600px' }}>
           <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', background: '#0f172a', padding: '0 15px', color: 'white', fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px', zIndex: 1 }}>ATAU</div>
           <div style={{ borderTop: '2px solid rgba(255,255,255,0.2)', width: '100%', position: 'absolute', top: '0', left: '0' }}></div>
-          <button className="btn btn-primary animate-fade-in animate-delay-3" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem', width: '100%', marginTop: '30px', boxShadow: 'var(--shadow-glow)' }} onClick={() => onSelectMode('comprehensive')}>
-            4. Mulai Tes Komprehensif (Rekomendasi) <ArrowRight size={24} />
+          <button className="btn btn-primary animate-fade-in animate-delay-4" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem', width: '100%', marginTop: '30px', boxShadow: 'var(--shadow-glow)' }} onClick={() => onSelectMode('comprehensive')}>
+            5. Mulai Tes Komprehensif (Rekomendasi) <ArrowRight size={24} />
           </button>
         </div>
 

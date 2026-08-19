@@ -181,11 +181,11 @@ export default function TestEngine({ selectedMode, onComplete }) {
           "{currentQuestion.text}"
         </h3>
 
-        {/* Likert Options */}
+        {/* Options */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          {likertOptions.map((option) => (
+          {(currentQuestion.options || likertOptions).map((option, idx) => (
             <button
-              key={option.value}
+              key={idx}
               onClick={() => handleAnswer(option.value)}
               className="btn btn-secondary"
               style={{

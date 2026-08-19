@@ -3,7 +3,8 @@ export function calculateScores(answers) {
     multiple_intelligence: {},
     personality: {},
     interest: {},
-    riasec: {}
+    riasec: {},
+    iq: {}
   };
 
   Object.values(answers).forEach(ans => {
@@ -35,10 +36,20 @@ export function getRecommendations(scores, userData, selectedMode = 'comprehensi
   const sortedInterest = Object.entries(interestScores).sort((a, b) => b[1] - a[1]);
   const topInterest = sortedInterest.length > 0 ? sortedInterest[0][0] : 'Sains & Analitik';
 
-  // 4. Build Roadmap based on Level and selectedMode
+  // 4. Get Top IQ (Wechsler)
+  const iqScores = scores.iq || {};
+  const sortedIQ = Object.entries(iqScores).sort((a, b) => b[1] - a[1]);
+  const topIQ = sortedIQ.length > 0 ? sortedIQ[0][0] : 'Pemahaman Verbal';
+
+  // 5. Build Roadmap based on Level and selectedMode
   let roadmap = [];
 
-  if (selectedMode === 'multiple_intelligence') {
+  if (selectedMode === 'iq') {
+    roadmap = [
+      { title: "Kekuatan Kognitif", desc: `Berdasarkan tes, pilar kecerdasan kognitif terkuat Anda adalah ${topIQ}. Ini menunjukkan keunggulan analitis Anda pada bidang tersebut (merujuk pada teori David Wechsler).` },
+      { title: "Rekomendasi Strategis", desc: `Maksimalkan ${topIQ} Anda untuk memecahkan masalah kompleks, sekaligus terus melatih aspek logika, spasial, dan memori lainnya agar kognitif Anda berkembang seimbang.` }
+    ];
+  } else if (selectedMode === 'multiple_intelligence') {
     roadmap = [
       { title: "Karakter Belajar", desc: `Kecerdasan kognitif dominan Anda adalah ${topMI}. Anda akan lebih cepat dan mudah memahami pelajaran jika materi disesuaikan dengan kekuatan ini.` },
       { title: "Potensi Aktivitas", desc: `Anda sangat direkomendasikan untuk mencari hobi, klub, atau proyek sekolah yang mengasah kemampuan ${topMI} Anda agar potensi tersebut tidak terbuang sia-sia.` }
@@ -109,15 +120,65 @@ export function getRecommendations(scores, userData, selectedMode = 'comprehensi
     topRiasec,
     topMI,
     topInterest,
+    topIQ,
     sortedRiasec,
     sortedMI,
     sortedInterest,
+    sortedIQ,
     roadmap
   };
 }
 
 export function getNarrative(testType, topCategory) {
-  if (testType === 'Kecerdasan Majemuk') {
+  if (testType === 'IQ (Kognitif)') {
+    const narratives = {
+      'Pemahaman Verbal': {
+        karakteristik: [
+          "Sangat tangkas dalam memahami, mengolah, dan menyimpulkan informasi verbal.",
+          "Memiliki kekayaan kosakata dan kemampuan mengekspresikan argumen logis yang kuat.",
+          "Mudah menangkap makna tersirat dan korelasi konsep dalam bacaan kompleks."
+        ],
+        saranPengembangan: [
+          "Gunakan kekuatan bahasa untuk memimpin diskusi, negosiasi, atau penulisan analitis.",
+          "Jangan lupakan aspek logika spasial dan matematis agar kemampuan kognitif tetap holistik."
+        ]
+      },
+      'Penalaran Perseptual': {
+        karakteristik: [
+          "Mampu memvisualisasikan, merotasi, dan membayangkan objek 3D dalam pikiran dengan akurat.",
+          "Memiliki logika spasial yang sangat peka, mampu melihat pola visual yang sering terlewatkan orang lain.",
+          "Pendekatan pemecahan masalah cenderung intuitif, kreatif, dan out-of-the-box."
+        ],
+        saranPengembangan: [
+          "Maksimalkan potensi di bidang desain, arsitektur, teknik, atau seni visual tingkat tinggi.",
+          "Latih komunikasi verbal agar Anda bisa menjelaskan pola visual rumit ke orang awam."
+        ]
+      },
+      'Memori Kerja': {
+        karakteristik: [
+          "Sangat piawai mengingat, memanipulasi, dan menghitung data/angka secara mental (di luar kepala).",
+          "Mampu mempertahankan konsentrasi tinggi saat memproses instruksi yang berlapis-lapis.",
+          "Analisis rasional dan logis berjalan sangat cepat untuk memecahkan masalah matematis."
+        ],
+        saranPengembangan: [
+          "Bidang pemrograman, aktuaria, atau sains data sangat membutuhkan kapasitas memori kerja seperti ini.",
+          "Pelajari teknik memori tingkat lanjut (mnemonic) untuk menguasai berbagai bahasa atau ilmu baru."
+        ]
+      },
+      'Kecepatan & Logika': {
+        karakteristik: [
+          "Cepat dalam memproses informasi baru, mengambil konklusi deduktif, dan mengeksekusi keputusan.",
+          "Tidak mudah panik di bawah tekanan waktu, logika tetap berjalan jernih.",
+          "Sangat tanggap terhadap perubahan instruksi dan mampu beradaptasi seketika."
+        ],
+        saranPengembangan: [
+          "Kemampuan ini sangat krusial dalam karir strategis, operasional lapangan, atau manajemen krisis.",
+          "Tetap berhati-hati, jangan biarkan kecepatan memengaruhi akurasi dan ketelitian detail."
+        ]
+      }
+    };
+    return narratives[topCategory] || narratives['Pemahaman Verbal'];
+  } else if (testType === 'Kecerdasan Majemuk') {
     const narratives = {
       'Linguistik': {
         karakteristik: [

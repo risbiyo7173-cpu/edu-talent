@@ -174,6 +174,32 @@ export const tests = [
       { id: "ria_29", text: "Saya mengatur file, meja belajar, atau dokumen penting saya sedemikian rupa agar sangat mudah dicari.", category: "Conventional" },
       { id: "ria_30", text: "Saya lebih suka bekerja dengan angka, data tertulis, atau perangkat lunak administrasi secara rutin.", category: "Conventional" }
     ]
+  },
+  {
+    id: "iq",
+    title: "Tes Kemampuan Kognitif (IQ)",
+    description: "Tes ini mengukur 4 pilar kecerdasan kognitif Anda berdasarkan kerangka David Wechsler. Pilihlah jawaban yang paling logis dan tepat.",
+    questions: [
+      // Pemahaman Verbal
+      { id: "iq_1", category: "Pemahaman Verbal", text: "Panas berbanding dengan Dingin, seperti halnya Terang berbanding dengan...", options: [{ label: "Gelap", value: 1 }, { label: "Silau", value: 0 }, { label: "Matahari", value: 0 }, { label: "Hitam", value: 0 }] },
+      { id: "iq_2", category: "Pemahaman Verbal", text: "Manakah dari kata berikut yang BUKAN merupakan kelompoknya?", options: [{ label: "Buku", value: 0 }, { label: "Majalah", value: 0 }, { label: "Koran", value: 0 }, { label: "Lemari", value: 1 }] },
+      { id: "iq_3", category: "Pemahaman Verbal", text: "Sinonim (persamaan kata) yang paling tepat untuk 'Evakuasi' adalah...", options: [{ label: "Penghancuran", value: 0 }, { label: "Penyelamatan", value: 1 }, { label: "Penelantaran", value: 0 }, { label: "Pembangunan", value: 0 }] },
+
+      // Penalaran Perseptual
+      { id: "iq_4", category: "Penalaran Perseptual", text: "Jika sebuah kubus dibuka lipatannya (jaring-jaring), ada berapa jumlah persegi yang menyusun kubus tersebut?", options: [{ label: "4", value: 0 }, { label: "5", value: 0 }, { label: "6", value: 1 }, { label: "8", value: 0 }] },
+      { id: "iq_5", category: "Penalaran Perseptual", text: "Jika Anda menghadap Utara, lalu berputar 90 derajat searah jarum jam, lalu berputar 180 derajat, arah mana yang sedang Anda hadapi?", options: [{ label: "Barat", value: 1 }, { label: "Timur", value: 0 }, { label: "Selatan", value: 0 }, { label: "Utara", value: 0 }] },
+      { id: "iq_6", category: "Penalaran Perseptual", text: "Bayangkan ada roda gigi A (kiri) yang bersinggungan dengan roda gigi B (kanan). Jika roda gigi A diputar searah jarum jam, bagaimana roda B berputar?", options: [{ label: "Searah jarum jam", value: 0 }, { label: "Berlawanan jarum jam", value: 1 }, { label: "Maju mundur", value: 0 }, { label: "Tidak bergerak", value: 0 }] },
+
+      // Memori Kerja
+      { id: "iq_7", category: "Memori Kerja", text: "Berapakah angka selanjutnya dari deret ini: 2, 4, 8, 16, ...?", options: [{ label: "20", value: 0 }, { label: "24", value: 0 }, { label: "32", value: 1 }, { label: "64", value: 0 }] },
+      { id: "iq_8", category: "Memori Kerja", text: "Jika 3x + 2 = 11, berapakah nilai x?", options: [{ label: "2", value: 0 }, { label: "3", value: 1 }, { label: "4", value: 0 }, { label: "5", value: 0 }] },
+      { id: "iq_9", category: "Memori Kerja", text: "Berapakah hasil dari 15 - 3 x 4?", options: [{ label: "48", value: 0 }, { label: "12", value: 0 }, { label: "3", value: 1 }, { label: "0", value: 0 }] },
+
+      // Kecepatan & Logika
+      { id: "iq_10", category: "Kecepatan & Logika", text: "Semua burung memiliki sayap. Pinguin adalah burung. Maka...", options: [{ label: "Pinguin bisa terbang", value: 0 }, { label: "Pinguin memiliki sayap", value: 1 }, { label: "Sebagian pinguin tidak punya sayap", value: 0 }, { label: "Sayap pinguin besar", value: 0 }] },
+      { id: "iq_11", category: "Kecepatan & Logika", text: "Jika hari ini hujan, saya membawa payung. Saya tidak membawa payung. Maka...", options: [{ label: "Hari ini hujan", value: 0 }, { label: "Hari ini tidak hujan", value: 1 }, { label: "Payung saya hilang", value: 0 }, { label: "Hari ini panas", value: 0 }] },
+      { id: "iq_12", category: "Kecepatan & Logika", text: "Jika Budi lebih tinggi dari Andi, dan Caca lebih tinggi dari Budi, siapakah yang paling pendek?", options: [{ label: "Budi", value: 0 }, { label: "Andi", value: 1 }, { label: "Caca", value: 0 }, { label: "Tidak ada jawaban benar", value: 0 }] }
+    ]
   }
 ];
 
