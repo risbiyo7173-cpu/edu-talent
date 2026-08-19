@@ -156,7 +156,6 @@ function RegisterPage({ onStartTest }) {
             <option value="sd">SD (Sekolah Dasar)</option>
             <option value="smp">SMP (Sekolah Menengah Pertama)</option>
             <option value="sma">SMA/SMK (Sekolah Menengah Atas/Kejuruan)</option>
-            <option value="umum">Mahasiswa / Umum</option>
           </select>
         </div>
 
