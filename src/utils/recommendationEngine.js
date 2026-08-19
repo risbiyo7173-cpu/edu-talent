@@ -38,8 +38,29 @@ export function getRecommendations(scores, userData, selectedMode = 'comprehensi
 
   // 4. Get Top IQ (Wechsler)
   const iqScores = scores.iq || {};
-  const sortedIQ = Object.entries(iqScores).sort((a, b) => b[1] - a[1]);
+  let totalIQCorrect = 0;
+  
+  // Convert raw IQ scores to standard IQ scores (mean 100) per pillar
+  // Max raw per pillar is 3. We'll map: 0->70, 1->90, 2->110, 3->130
+  const standardIqScores = {};
+  Object.entries(iqScores).forEach(([cat, val]) => {
+    totalIQCorrect += val;
+    standardIqScores[cat] = 70 + (val * 20);
+  });
+  
+  const sortedIQ = Object.entries(standardIqScores).sort((a, b) => b[1] - a[1]);
   const topIQ = sortedIQ.length > 0 ? sortedIQ[0][0] : 'Pemahaman Verbal';
+
+  // Calculate Full Scale IQ (FSIQ)
+  // Total raw max = 12. Map to 70-130. 
+  // Formula: 70 + (totalIQCorrect * 5)
+  const fsiq = 70 + (totalIQCorrect * 5);
+  let fsiqCategory = 'Rata-rata';
+  if (fsiq >= 120) fsiqCategory = 'Superior';
+  else if (fsiq >= 110) fsiqCategory = 'Di Atas Rata-rata';
+  else if (fsiq >= 90) fsiqCategory = 'Rata-rata';
+  else if (fsiq >= 80) fsiqCategory = 'Di Bawah Rata-rata';
+  else fsiqCategory = 'Kurang';
 
   // 5. Build Roadmap based on Level and selectedMode
   let roadmap = [];
@@ -125,6 +146,8 @@ export function getRecommendations(scores, userData, selectedMode = 'comprehensi
     sortedMI,
     sortedInterest,
     sortedIQ,
+    fsiq,
+    fsiqCategory,
     roadmap
   };
 }

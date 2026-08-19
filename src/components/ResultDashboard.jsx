@@ -320,6 +320,16 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
           </div>
         )}
 
+        {(selectedMode === 'comprehensive' || selectedMode === 'iq') && recs.fsiq && (
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
+            <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Skor IQ (FSIQ)</h4>
+            <h2 style={{ fontSize: '2.5rem', margin: '10px 0', color: '#8b5cf6' }}>{recs.fsiq}</h2>
+            <div style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', padding: '5px 15px', borderRadius: '20px', display: 'inline-block', fontSize: '0.9rem', fontWeight: 'bold' }}>
+              {recs.fsiqCategory}
+            </div>
+          </div>
+        )}
+
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && (
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Pilar Kognitif (IQ)</h4>
