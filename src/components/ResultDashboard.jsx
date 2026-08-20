@@ -115,8 +115,10 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
   const { recs } = analysis;
 
   // Expert Radar Chart Component
-  const renderRadarChart = (data, title, icon, color, expertName, expertRole, expertImageMode) => {
+  const renderRadarChart = (data, title, icon, color, expertName, expertRole, isFirst = false) => {
     if (!data || data.length === 0) return null;
+    
+    // Cari nilai maksimum untuk skala dinamis (minimal 10)
     const maxVal = Math.max(...data.map(d => d[1]), 10);
     
     // Format data for Recharts Radar (Combine subject and score for axis labels)
@@ -133,11 +135,13 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const isSMP = userData?.level === 'smp';
     
     return (
-      <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
-        <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
-            {icon} {title}
-          </h3>
+      <React.Fragment>
+        {!isFirst && <div className="html2pdf__page-break"></div>}
+        <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
+          <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
+              {icon} {title}
+            </h3>
           
           {/* Radar Chart Section */}
           <div className="radar-chart-container" style={{ width: '100%', height: '525px', marginBottom: '2rem' }}>
@@ -168,9 +172,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
             
             const isTop = index === 0;
             return (
-              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ display: 'inline-block', width: '100%', marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: isTop ? 'auto' : 'avoid', breakInside: isTop ? 'auto' : 'avoid' }}>
+              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ display: 'block', width: '100%', marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: isTop ? 'auto' : 'avoid', breakInside: isTop ? 'auto' : 'avoid' }}>
                 
-                <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                 {/* Expert Profile Header (Hanya untuk Peringkat 1) */}
                 {isTop && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px dashed rgba(255,255,255,0.1)' }}>
@@ -202,7 +206,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   }
                 </div>
                 
-                <div style={{ display: 'inline-block', width: '100%', marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'block', width: '100%', marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Karakteristik:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.karakteristik.map((item, i) => (
@@ -211,7 +215,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   </ul>
                 </div>
 
-                <div style={{ display: 'inline-block', width: '100%', marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'block', width: '100%', marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Saran Pengembangan Diri:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.saranPengembangan.map((item, i) => (
@@ -221,7 +225,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 </div>
 
                 {isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) && (
-                  <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
                     <div style={{ flex: '1 1 45%' }}>
                       {isSMP && catNarrative.rekomendasiJurusanSMK && (
@@ -284,6 +288,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
           })}
         </div>
       </div>
+      </React.Fragment>
     );
   };
 
@@ -399,7 +404,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {recs.roadmap.map((step, idx) => (
-            <div key={idx} style={{ pageBreakInside: 'avoid', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
+            <div key={idx} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
               <div style={{ display: 'flex', gap: '20px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--accent)' }}>
@@ -431,7 +436,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
               <Star size={20} color="var(--primary)" />, 
               "var(--primary)",
               "Howard Gardner",
-              "Pakar Psikologi Kognitif (Harvard University)"
+              "Pakar Psikologi Kognitif (Harvard University)",
+              true // isFirst
             )
           }
 
