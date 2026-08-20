@@ -45,18 +45,13 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
     const originalMargin = element.style.margin;
-    const originalPosition = element.style.position;
-    const originalLeft = element.style.left;
-    const originalTop = element.style.top;
     
-    // Paksa ukuran optimal (800px) dan posisikan paksa di pojok kiri atas
-    // Ini memastikan html2canvas tidak terpengaruh oleh margin browser atau ukuran layar
+    // Set fixed width untuk A4.
+    // Tanpa position: absolute agar tidak blank saat di-scroll, 
+    // dan tanpa windowWidth agar tidak terpotong di sebelah kanan akibat padding.
     element.style.width = '800px';
     element.style.maxWidth = '800px';
-    element.style.margin = '0'; 
-    element.style.position = 'absolute';
-    element.style.left = '0';
-    element.style.top = '0';
+    element.style.margin = '0 auto';
     
     // Aktifkan mode cetak (teks hitam, background putih)
     element.classList.add('pdf-export-mode');
@@ -69,10 +64,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         scale: 2, 
         useCORS: true, 
         logging: false, 
-        backgroundColor: '#ffffff', 
-        windowWidth: 800,
-        scrollX: 0,
-        scrollY: 0
+        backgroundColor: '#ffffff'
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
@@ -86,9 +78,6 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     element.style.width = originalWidth;
     element.style.maxWidth = originalMaxWidth;
     element.style.margin = originalMargin;
-    element.style.position = originalPosition;
-    element.style.left = originalLeft;
-    element.style.top = originalTop;
     
     setIsExporting(false);
   };
