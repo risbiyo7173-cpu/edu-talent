@@ -134,12 +134,13 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     
     return (
       <div className="glass-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
-        <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
-          {icon} {title}
-        </h3>
-        
-        {/* Radar Chart Section */}
-        <div className="radar-chart-container" style={{ width: '100%', height: '525px', marginBottom: '2rem' }}>
+        <div style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
+            {icon} {title}
+          </h3>
+          
+          {/* Radar Chart Section */}
+          <div className="radar-chart-container" style={{ width: '100%', height: '525px', marginBottom: '2rem' }}>
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
               <PolarGrid stroke="var(--grid-line-color)" />
@@ -152,6 +153,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
               <Radar name="Skor" dataKey="score" stroke={color} strokeWidth={2} fill={color} fillOpacity={0.4} />
             </RadarChart>
           </ResponsiveContainer>
+        </div>
         </div>
 
         {/* Rincian Analisis Per Indikator */}
