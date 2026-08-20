@@ -222,8 +222,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
 
                 {isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) && (
                   <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
-                    <div>
+                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
+                    <div style={{ flex: '1 1 45%' }}>
                       {isSMP && catNarrative.rekomendasiJurusanSMK && (
                         <div style={{ marginBottom: '1.5rem' }}>
                           <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>Rekomendasi SMA / SMK:</strong>
@@ -245,7 +245,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                         </div>
                       )}
                     </div>
-                    <div>
+                    <div style={{ flex: '1 1 45%' }}>
                       {isSMP && catNarrative.rekomendasiProfesiSMK && (
                         <div style={{ marginBottom: '1.5rem' }}>
                           <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '12px' }}>Prospek Karir Lulusan SMK:</strong>
@@ -340,9 +340,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Highlights */}
-      <div className="highlights-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+      <div className="highlights-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
         {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && (
-          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', flex: '1 1 280px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--primary)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Kecerdasan Dominan</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--primary)' }}>{recs.topMI}</h2>
@@ -351,7 +351,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         )}
         
         {(selectedMode === 'comprehensive' || selectedMode === 'riasec') && (
-          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', flex: '1 1 280px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--secondary)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Tipe Karir (Holland)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--secondary)' }}>{recs.topRiasec}</h2>
@@ -360,7 +360,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && recs.fsiq && (
-          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', flex: '1 1 280px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Skor IQ (FSIQ)</h4>
             <h2 style={{ fontSize: '2.5rem', margin: '10px 0', color: '#8b5cf6' }}>{recs.fsiq}</h2>
@@ -372,7 +372,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && (
-          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', flex: '1 1 280px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Pilar Kognitif (IQ)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: '#8b5cf6' }}>{recs.topIQ}</h2>
@@ -381,7 +381,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         )}
 
         {selectedMode === 'interest' && (
-          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', flex: '1 1 280px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Fokus Minat</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--accent)' }}>Tes Minat Selesai</h2>
@@ -422,7 +422,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       {/* Rincian Skor */}
       <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
-        <div className="radar-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+        <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
           {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && 
             renderRadarChart(
