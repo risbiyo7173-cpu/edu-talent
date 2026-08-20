@@ -168,8 +168,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
             
             const isTop = index === 0;
             return (
-              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: 'avoid' }}>
+              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0' }}>
                 
+                <div style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                 {/* Expert Profile Header (Hanya untuk Peringkat 1) */}
                 {isTop && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px dashed rgba(255,255,255,0.1)' }}>
@@ -192,6 +193,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                     Skor: {score}
                   </span>
                 </div>
+                </div>
 
                 <div style={{ fontStyle: 'italic', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
                   {isTop 
@@ -200,7 +202,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   }
                 </div>
                 
-                <div style={{ marginBottom: '1.5rem' }}>
+                <div style={{ marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Karakteristik:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.karakteristik.map((item, i) => (
@@ -209,7 +211,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   </ul>
                 </div>
 
-                <div style={{ marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0' }}>
+                <div style={{ marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Saran Pengembangan Diri:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.saranPengembangan.map((item, i) => (
@@ -219,7 +221,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 </div>
 
                 {isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) && (
-                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
+                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                     <div>
                       {isSMP && catNarrative.rekomendasiJurusanSMK && (
                         <div style={{ marginBottom: '1.5rem' }}>
@@ -268,7 +270,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 )}
 
                 {isTop && catNarrative.trenPekerjaan && (
-                  <div style={{ marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px' }}>
+                  <div style={{ marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                     <strong style={{ color: 'var(--accent)', display: 'block', marginBottom: '8px' }}>Insight Dunia Kerja Saat Ini:</strong>
                     <p style={{ margin: 0, lineHeight: '1.6', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       {catNarrative.trenPekerjaan}
