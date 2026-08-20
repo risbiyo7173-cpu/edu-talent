@@ -55,6 +55,10 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     // Tunggu DOM update dan biarkan Recharts me-resize grafiknya (500ms)
     await new Promise(resolve => setTimeout(resolve, 500));
 
+    // Ambil koordinat pasti dari elemen setelah di-resize agar html2canvas
+    // tidak merekam margin kosong di sebelah kiri (yang bikin PDF condong ke kanan)
+    const rect = element.getBoundingClientRect();
+
     const opt = {
       margin:       [10, 10, 10, 10], // Margin simetris: [atas, kiri, bawah, kanan] dalam mm
       filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
@@ -63,7 +67,10 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         scale: 2, 
         useCORS: true, 
         logging: false, 
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        x: rect.left + window.scrollX,
+        y: rect.top + window.scrollY,
+        width: 800
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
