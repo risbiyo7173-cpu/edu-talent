@@ -133,8 +133,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const isSMP = userData?.level === 'smp';
     
     return (
-      <div className="glass-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+      <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
+        <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
           <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
             {icon} {title}
           </h3>
