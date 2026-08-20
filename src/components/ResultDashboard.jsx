@@ -42,26 +42,34 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
     const originalMargin = element.style.margin;
+    const originalContainerMargin = container ? container.style.margin : '';
     const originalContainerPadding = container ? container.style.padding : '';
     
-    // Hapus padding container agar elemen menempel sempurna di kiri layar
-    // Ini mencegah html2canvas merekam ruang kosong (margin/padding) yang membuat PDF tergeser.
-    if (container) container.style.padding = '0';
+    // RESET TOTAL semua offset (margin & padding) dari layar.
+    // html2canvas punya bug di mana ia ikut merekam margin/padding layar 
+    // sehingga PDF menjadi bergeser ke kiri atau kanan.
+    if (container) {
+      container.style.margin = '0';
+      container.style.padding = '0';
+    }
 
-    // Set fixed width untuk A4.
-    // LAKUKAN INI SEBELUM TIMEOUT! 
+    // Set fixed width 800px dan hapus margin elemen
     element.style.width = '800px';
     element.style.maxWidth = '800px';
-    element.style.margin = '0'; // Rata kiri, jangan gunakan auto agar tidak ada offset!
+    element.style.margin = '0';
     element.classList.add('pdf-export-mode');
 
     setIsExporting(true);
     
-    // Tunggu DOM update dan biarkan Recharts me-resize grafiknya (500ms)
+    // Tunggu 500ms agar DOM stabil dan grafik Recharts selesai me-resize
     await new Promise(resolve => setTimeout(resolve, 500));
 
+    // Scroll paksa ke paling atas agar viewport html2canvas sejajar dengan elemen
+    const currentScrollY = window.scrollY;
+    window.scrollTo(0, 0);
+
     const opt = {
-      margin:       [10, 10, 10, 10], // Margin simetris: [atas, kiri, bawah, kanan] dalam mm
+      margin:       [10, 10, 10, 10], // Margin simetris dalam mm
       filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { 
@@ -77,12 +85,16 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     // Tunggu proses render PDF selesai
     await html2pdf().set(opt).from(element).save();
     
-    // Restore
+    // Restore semua style
+    window.scrollTo(0, currentScrollY);
     element.classList.remove('pdf-export-mode');
     element.style.width = originalWidth;
     element.style.maxWidth = originalMaxWidth;
     element.style.margin = originalMargin;
-    if (container) container.style.padding = originalContainerPadding;
+    if (container) {
+      container.style.margin = originalContainerMargin;
+      container.style.padding = originalContainerPadding;
+    }
     
     setIsExporting(false);
   };
