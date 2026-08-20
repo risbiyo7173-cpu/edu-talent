@@ -168,7 +168,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
             
             const isTop = index === 0;
             return (
-              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0' }}>
+              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: isTop ? 'auto' : 'avoid', breakInside: isTop ? 'auto' : 'avoid' }}>
                 
                 <div style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                 {/* Expert Profile Header (Hanya untuk Peringkat 1) */}
@@ -406,7 +406,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div className="html2pdf__page-break"></div>
+      <div style={{ pageBreakBefore: 'always', breakBefore: 'page' }}></div>
       <div style={{ marginBottom: '3rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
