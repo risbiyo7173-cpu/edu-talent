@@ -83,7 +83,6 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { 
         mode: ['css', 'legacy'], 
-        before: '.page-break-before', 
         avoid: ['.glass-card', '.indicator-card-top', '.indicator-card-sub', '.radar-chart-container', '.pdf-avoid-break'] 
       }
     };
@@ -140,7 +139,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     
     return (
       <React.Fragment>
-        <div className={`glass-card ${!isFirst ? 'page-break-before' : ''}`} style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
+        <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
           <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
               {icon} {title}
@@ -437,7 +436,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div className="page-break-before" style={{ marginBottom: '3rem' }}>
+      <div className="html2pdf__page-break" style={{ display: 'block', height: '1px' }}></div>
+      <div style={{ marginBottom: '3rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
