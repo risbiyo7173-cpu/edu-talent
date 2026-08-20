@@ -136,7 +136,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     
     return (
       <React.Fragment>
-        {!isFirst && <div className="html2pdf__page-break"></div>}
+        {!isFirst && <div className="html2pdf__page-break" style={{ display: 'block', height: '1px' }}></div>}
         <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
           <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
@@ -425,7 +425,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
+      <div className="html2pdf__page-break" style={{ display: 'block', height: '1px' }}></div>
+      <div style={{ marginBottom: '3rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
