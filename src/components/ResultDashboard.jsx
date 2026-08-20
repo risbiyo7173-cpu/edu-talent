@@ -53,9 +53,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       container.style.padding = '0';
     }
 
-    // Set fixed width 900px (diperlebar sedikit agar tidak ada elemen dalam yang meluber/terpotong di kanan)
-    element.style.width = '900px';
-    element.style.maxWidth = '900px';
+    // Set fixed width 800px (ukuran optimal untuk A4)
+    element.style.width = '800px';
+    element.style.maxWidth = '800px';
     element.style.margin = '0';
     element.classList.add('pdf-export-mode');
 
@@ -76,7 +76,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         scale: 2, 
         useCORS: true, 
         logging: false, 
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        windowWidth: 800, // PAKSA html2canvas membaca lebar layar 800px agar teks tidak meluber ke kanan!
+        width: 800
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
