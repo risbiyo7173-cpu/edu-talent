@@ -168,9 +168,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
             
             const isTop = index === 0;
             return (
-              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: isTop ? 'auto' : 'avoid', breakInside: isTop ? 'auto' : 'avoid' }}>
+              <div key={category} className={isTop ? "indicator-card-top" : "indicator-card-sub"} style={{ display: 'inline-block', width: '100%', marginBottom: '2rem', padding: '1.5rem', background: isExporting ? 'transparent' : (isTop ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.15)'), borderLeft: `4px solid ${isTop ? color : 'var(--border-light)'}`, borderRadius: '0 8px 8px 0', pageBreakInside: isTop ? 'auto' : 'avoid', breakInside: isTop ? 'auto' : 'avoid' }}>
                 
-                <div style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                 {/* Expert Profile Header (Hanya untuk Peringkat 1) */}
                 {isTop && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px dashed rgba(255,255,255,0.1)' }}>
@@ -202,7 +202,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   }
                 </div>
                 
-                <div style={{ marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'inline-block', width: '100%', marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Karakteristik:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.karakteristik.map((item, i) => (
@@ -211,7 +211,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   </ul>
                 </div>
 
-                <div style={{ marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'inline-block', width: '100%', marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Saran Pengembangan Diri:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.saranPengembangan.map((item, i) => (
@@ -221,7 +221,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 </div>
 
                 {isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) && (
-                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
                     <div>
                       {isSMP && catNarrative.rekomendasiJurusanSMK && (
                         <div style={{ marginBottom: '1.5rem' }}>
@@ -267,10 +268,11 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                       )}
                     </div>
                   </div>
+                  </div>
                 )}
 
                 {isTop && catNarrative.trenPekerjaan && (
-                  <div style={{ marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div style={{ display: 'inline-block', width: '100%', marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
                     <strong style={{ color: 'var(--accent)', display: 'block', marginBottom: '8px' }}>Insight Dunia Kerja Saat Ini:</strong>
                     <p style={{ margin: 0, lineHeight: '1.6', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       {catNarrative.trenPekerjaan}
@@ -340,40 +342,50 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       {/* Highlights */}
       <div className="highlights-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
         {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--primary)', pageBreakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--primary)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Kecerdasan Dominan</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--primary)' }}>{recs.topMI}</h2>
+          </div>
           </div>
         )}
         
         {(selectedMode === 'comprehensive' || selectedMode === 'riasec') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--secondary)', pageBreakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--secondary)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Tipe Karir (Holland)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--secondary)' }}>{recs.topRiasec}</h2>
+          </div>
           </div>
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && recs.fsiq && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6', pageBreakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Skor IQ (FSIQ)</h4>
             <h2 style={{ fontSize: '2.5rem', margin: '10px 0', color: '#8b5cf6' }}>{recs.fsiq}</h2>
             <div style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', padding: '5px 15px', borderRadius: '20px', display: 'inline-block', fontSize: '0.9rem', fontWeight: 'bold' }}>
               {recs.fsiqCategory}
             </div>
           </div>
+          </div>
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6', pageBreakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Pilar Kognitif (IQ)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: '#8b5cf6' }}>{recs.topIQ}</h2>
+          </div>
           </div>
         )}
 
         {selectedMode === 'interest' && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)', pageBreakInside: 'avoid' }}>
+          <div style={{ display: 'inline-block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Fokus Minat</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--accent)' }}>Tes Minat Selesai</h2>
+          </div>
           </div>
         )}
       </div>
@@ -387,18 +399,20 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {recs.roadmap.map((step, idx) => (
-            <div key={idx} style={{ display: 'flex', gap: '20px', pageBreakInside: 'avoid' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--accent)' }}>
-                  {idx + 1}
+            <div key={idx} style={{ pageBreakInside: 'avoid', breakInside: 'avoid', display: 'inline-block', width: '100%' }}>
+              <div style={{ display: 'flex', gap: '20px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--accent)' }}>
+                    {idx + 1}
+                  </div>
+                  {idx !== recs.roadmap.length - 1 && (
+                    <div style={{ width: '2px', flexGrow: 1, background: 'rgba(255,255,255,0.1)', margin: '10px 0' }} />
+                  )}
                 </div>
-                {idx !== recs.roadmap.length - 1 && (
-                  <div style={{ width: '2px', flexGrow: 1, background: 'rgba(255,255,255,0.1)', margin: '10px 0' }} />
-                )}
-              </div>
-              <div className="indicator-card-sub" style={{ background: isExporting ? 'transparent' : 'rgba(0,0,0,0.2)', padding: '1.5rem', borderRadius: '12px', flexGrow: 1, border: '1px solid var(--border-glass)' }}>
-                <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '8px' }}>{step.title}</h4>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{step.desc}</p>
+                <div className="indicator-card-sub" style={{ background: isExporting ? 'transparent' : 'rgba(0,0,0,0.2)', padding: '1.5rem', borderRadius: '12px', flexGrow: 1, border: '1px solid var(--border-glass)' }}>
+                  <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', marginBottom: '8px' }}>{step.title}</h4>
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{step.desc}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -406,8 +420,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div style={{ pageBreakBefore: 'always', breakBefore: 'page' }}></div>
-      <div style={{ marginBottom: '3rem' }}>
+      <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
           
