@@ -53,9 +53,9 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       container.style.padding = '0';
     }
 
-    // Set fixed width 800px dan hapus margin elemen
-    element.style.width = '800px';
-    element.style.maxWidth = '800px';
+    // Set fixed width 900px (diperlebar sedikit agar tidak ada elemen dalam yang meluber/terpotong di kanan)
+    element.style.width = '900px';
+    element.style.maxWidth = '900px';
     element.style.margin = '0';
     element.classList.add('pdf-export-mode');
 
@@ -334,21 +334,21 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       {/* Highlights */}
       <div className="highlights-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
         {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--primary)' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--primary)', pageBreakInside: 'avoid' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Kecerdasan Dominan</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--primary)' }}>{recs.topMI}</h2>
           </div>
         )}
         
         {(selectedMode === 'comprehensive' || selectedMode === 'riasec') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--secondary)' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--secondary)', pageBreakInside: 'avoid' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Tipe Karir (Holland)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--secondary)' }}>{recs.topRiasec}</h2>
           </div>
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && recs.fsiq && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6', pageBreakInside: 'avoid' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Skor IQ (FSIQ)</h4>
             <h2 style={{ fontSize: '2.5rem', margin: '10px 0', color: '#8b5cf6' }}>{recs.fsiq}</h2>
             <div style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', padding: '5px 15px', borderRadius: '20px', display: 'inline-block', fontSize: '0.9rem', fontWeight: 'bold' }}>
@@ -358,14 +358,14 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         )}
 
         {(selectedMode === 'comprehensive' || selectedMode === 'iq') && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid #8b5cf6', pageBreakInside: 'avoid' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Pilar Kognitif (IQ)</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: '#8b5cf6' }}>{recs.topIQ}</h2>
           </div>
         )}
 
         {selectedMode === 'interest' && (
-          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)' }}>
+          <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', borderTop: '4px solid var(--accent)', pageBreakInside: 'avoid' }}>
             <h4 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Fokus Minat</h4>
             <h2 style={{ fontSize: '2rem', marginTop: '10px', color: 'var(--accent)' }}>Tes Minat Selesai</h2>
           </div>
