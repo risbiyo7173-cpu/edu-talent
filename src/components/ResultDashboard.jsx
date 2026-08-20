@@ -35,10 +35,6 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
   }, [userData, testResults, navigate, selectedMode, onClose, initialAnalysis]);
 
   const handleDownloadPDF = async () => {
-    setIsExporting(true);
-    // Tunggu DOM update dari isExporting
-    await new Promise(resolve => setTimeout(resolve, 150));
-
     const element = document.getElementById('pdf-content');
     
     // Simpan style asli
@@ -47,14 +43,17 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const originalMargin = element.style.margin;
     
     // Set fixed width untuk A4.
-    // Tanpa position: absolute agar tidak blank saat di-scroll, 
-    // dan tanpa windowWidth agar tidak terpotong di sebelah kanan akibat padding.
+    // LAKUKAN INI SEBELUM TIMEOUT! Jika tidak, grafik Radar (Recharts ResponsiveContainer)
+    // tidak punya waktu untuk me-resize ukurannya ke 800px, sehingga posisinya miring ke kanan.
     element.style.width = '800px';
     element.style.maxWidth = '800px';
     element.style.margin = '0 auto';
-    
-    // Aktifkan mode cetak (teks hitam, background putih)
     element.classList.add('pdf-export-mode');
+
+    setIsExporting(true);
+    
+    // Tunggu DOM update dan biarkan Recharts me-resize grafiknya (500ms)
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     const opt = {
       margin:       [10, 10, 10, 10], // Margin simetris: [atas, kiri, bawah, kanan] dalam mm
