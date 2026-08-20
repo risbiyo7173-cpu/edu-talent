@@ -148,18 +148,27 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
           
           {/* Radar Chart Section */}
           <div className="radar-chart-container" style={{ width: '100%', height: '525px', marginBottom: '2rem' }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
-              <PolarGrid stroke="var(--grid-line-color)" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: isExporting ? '#000000' : 'var(--text-primary)', fontSize: 13, fontWeight: 'bold' }} />
-              <PolarRadiusAxis angle={30} domain={[0, maxVal]} tick={false} axisLine={false} />
-              <RechartsTooltip 
-                contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: `1px solid ${color}`, borderRadius: '8px', color: 'white' }}
-                itemStyle={{ color: color, fontWeight: 'bold' }}
-              />
-              <Radar name="Skor" dataKey="score" stroke={color} strokeWidth={2} fill={color} fillOpacity={0.4} />
-            </RadarChart>
-          </ResponsiveContainer>
+            {isExporting ? (
+              <RadarChart width={736} height={525} cx="50%" cy="50%" outerRadius="80%" data={chartData}>
+                <PolarGrid stroke="rgba(0,0,0,0.1)" />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: '#000000', fontSize: 13, fontWeight: 'bold' }} />
+                <PolarRadiusAxis angle={30} domain={[0, maxVal]} tick={false} axisLine={false} />
+                <Radar name="Skor" dataKey="score" stroke={color} strokeWidth={2} fill={color} fillOpacity={0.4} />
+              </RadarChart>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
+                  <PolarGrid stroke="var(--grid-line-color)" />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-primary)', fontSize: 13, fontWeight: 'bold' }} />
+                  <PolarRadiusAxis angle={30} domain={[0, maxVal]} tick={false} axisLine={false} />
+                  <RechartsTooltip 
+                    contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: `1px solid ${color}`, borderRadius: '8px', color: 'white' }}
+                    itemStyle={{ color: color, fontWeight: 'bold' }}
+                  />
+                  <Radar name="Skor" dataKey="score" stroke={color} strokeWidth={2} fill={color} fillOpacity={0.4} />
+                </RadarChart>
+              </ResponsiveContainer>
+            )}
         </div>
         </div>
 
