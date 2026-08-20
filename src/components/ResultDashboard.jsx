@@ -36,28 +36,29 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
 
   const handleDownloadPDF = async () => {
     const element = document.getElementById('pdf-content');
+    const container = element.closest('.container');
     
     // Simpan style asli
     const originalWidth = element.style.width;
     const originalMaxWidth = element.style.maxWidth;
     const originalMargin = element.style.margin;
+    const originalContainerPadding = container ? container.style.padding : '';
     
+    // Hapus padding container agar elemen menempel sempurna di kiri layar
+    // Ini mencegah html2canvas merekam ruang kosong (margin/padding) yang membuat PDF tergeser.
+    if (container) container.style.padding = '0';
+
     // Set fixed width untuk A4.
-    // LAKUKAN INI SEBELUM TIMEOUT! Jika tidak, grafik Radar (Recharts ResponsiveContainer)
-    // tidak punya waktu untuk me-resize ukurannya ke 800px, sehingga posisinya miring ke kanan.
+    // LAKUKAN INI SEBELUM TIMEOUT! 
     element.style.width = '800px';
     element.style.maxWidth = '800px';
-    element.style.margin = '0 auto';
+    element.style.margin = '0'; // Rata kiri, jangan gunakan auto agar tidak ada offset!
     element.classList.add('pdf-export-mode');
 
     setIsExporting(true);
     
     // Tunggu DOM update dan biarkan Recharts me-resize grafiknya (500ms)
     await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Ambil koordinat pasti dari elemen setelah di-resize agar html2canvas
-    // tidak merekam margin kosong di sebelah kiri (yang bikin PDF condong ke kanan)
-    const rect = element.getBoundingClientRect();
 
     const opt = {
       margin:       [10, 10, 10, 10], // Margin simetris: [atas, kiri, bawah, kanan] dalam mm
@@ -67,10 +68,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         scale: 2, 
         useCORS: true, 
         logging: false, 
-        backgroundColor: '#ffffff',
-        x: rect.left + window.scrollX,
-        y: rect.top + window.scrollY,
-        width: 800
+        backgroundColor: '#ffffff'
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak:    { mode: ['css', 'legacy'] }
@@ -79,11 +77,12 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     // Tunggu proses render PDF selesai
     await html2pdf().set(opt).from(element).save();
     
-    // Kembalikan ke mode gelap
+    // Restore
     element.classList.remove('pdf-export-mode');
     element.style.width = originalWidth;
     element.style.maxWidth = originalMaxWidth;
     element.style.margin = originalMargin;
+    if (container) container.style.padding = originalContainerPadding;
     
     setIsExporting(false);
   };
