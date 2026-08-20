@@ -81,7 +81,11 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         width: 800
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: ['css', 'legacy'] }
+      pagebreak:    { 
+        mode: ['css', 'legacy'], 
+        before: '.page-break-before', 
+        avoid: ['.glass-card', '.indicator-card-top', '.indicator-card-sub', '.radar-chart-container', '.pdf-avoid-break'] 
+      }
     };
     
     // Tunggu proses render PDF selesai
@@ -136,8 +140,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     
     return (
       <React.Fragment>
-        {!isFirst && <div className="html2pdf__page-break" style={{ display: 'block', height: '1px' }}></div>}
-        <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
+        <div className={`glass-card ${!isFirst ? 'page-break-before' : ''}`} style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
           <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
               {icon} {title}
@@ -404,7 +407,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {recs.roadmap.map((step, idx) => (
-            <div key={idx} style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+            <div key={idx} className="pdf-avoid-break" style={{ pageBreakInside: 'avoid', breakInside: 'avoid' }}>
               <div style={{ display: 'flex', gap: '20px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '2px solid var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--accent)' }}>
@@ -425,8 +428,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div className="html2pdf__page-break" style={{ display: 'block', height: '1px' }}></div>
-      <div style={{ marginBottom: '3rem' }}>
+      <div className="page-break-before" style={{ marginBottom: '3rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
