@@ -95,7 +95,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     return (
       <React.Fragment>
         <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
-          <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+          <div style={{ display: 'block', width: '100%' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
               {icon} {title}
             </h3>
@@ -172,7 +172,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   }
                 </div>
                 
-                <div style={{ display: 'block', width: '100%', marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'block', width: '100%', marginBottom: '1.5rem' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Karakteristik:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.karakteristik.map((item, i) => (
@@ -181,7 +181,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   </ul>
                 </div>
 
-                <div style={{ display: 'block', width: '100%', marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                <div style={{ display: 'block', width: '100%', marginBottom: isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) ? '1.5rem' : '0' }}>
                   <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '8px' }}>Saran Pengembangan Diri:</strong>
                   <ul style={{ paddingLeft: '1.2rem', margin: 0, lineHeight: '1.6', fontSize: '0.95rem' }}>
                     {catNarrative.saranPengembangan.map((item, i) => (
@@ -191,7 +191,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 </div>
 
                 {isTop && (catNarrative.rekomendasiJurusan || catNarrative.rekomendasiJurusanSMK) && (
-                  <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div style={{ display: 'block', width: '100%' }}>
                   <div className="grid-responsive-2" style={{ marginTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1.5rem' }}>
                     <div style={{ flex: '1 1 45%' }}>
                       {isSMP && catNarrative.rekomendasiJurusanSMK && (
@@ -242,7 +242,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                 )}
 
                 {isTop && catNarrative.trenPekerjaan && (
-                  <div style={{ display: 'inline-block', width: '100%', marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                  <div style={{ display: 'inline-block', width: '100%', marginTop: '1.5rem', padding: '1rem', background: isExporting ? 'transparent' : 'rgba(245, 158, 11, 0.1)', border: '1px solid var(--accent)', borderRadius: '8px' }}>
                     <strong style={{ color: 'var(--accent)', display: 'block', marginBottom: '8px' }}>Insight Dunia Kerja Saat Ini:</strong>
                     <p style={{ margin: 0, lineHeight: '1.6', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       {catNarrative.trenPekerjaan}
@@ -393,7 +393,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       {/* Rincian Skor */}
       <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
-        <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div className="radar-grid-container" style={{ display: 'block' }}>
           
           {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && 
             renderRadarChart(

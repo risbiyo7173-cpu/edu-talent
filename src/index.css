@@ -309,9 +309,7 @@ select.input-field option {
 /* Force CSS Grid to stack vertically in PDF so html2pdf doesn't cut items horizontally */
 .pdf-export-mode .radar-grid-container,
 .pdf-export-mode .highlights-container {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1.5rem !important;
+  display: block !important;
 }
 
 /* Force page breaks to be respected */
