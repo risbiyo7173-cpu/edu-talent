@@ -272,6 +272,14 @@ select.input-field option {
 .pdf-export-mode h1, 
 .pdf-export-mode h2, 
 .pdf-export-mode h3, 
+.pdf-export-mode h4 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.pdf-export-mode h1, 
+.pdf-export-mode h2, 
+.pdf-export-mode h3, 
 .pdf-export-mode h4, 
 .pdf-export-mode p, 
 .pdf-export-mode span, 

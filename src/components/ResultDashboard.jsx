@@ -128,7 +128,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
 
         {/* Rincian Analisis Per Indikator */}
         <div style={{ marginTop: '2rem' }}>
-          <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>
+          <h4 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', pageBreakAfter: 'avoid', breakAfter: 'avoid' }}>
             Rincian Analisis per Indikator
           </h4>
           
@@ -391,8 +391,8 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
+      <div style={{ marginBottom: '3rem' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem', pageBreakAfter: 'avoid', breakAfter: 'avoid' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'block' }}>
           
           {(selectedMode === 'comprehensive' || selectedMode === 'multiple_intelligence') && 
