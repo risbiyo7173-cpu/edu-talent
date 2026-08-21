@@ -443,6 +443,14 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         </div>
       </div>
       
+      {/* Footer Dokumen Resmi */}
+      {isExporting && (
+        <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '2px dashed var(--border-light)', textAlign: 'center', color: 'var(--text-muted)' }}>
+          <p style={{ margin: '0 0 5px 0', fontSize: '0.9rem', fontWeight: 'bold' }}>EduTalent Assessment System &copy; {new Date().getFullYear()}</p>
+          <p style={{ margin: 0, fontSize: '0.8rem' }}>Dokumen ini dihasilkan secara otomatis oleh sistem dan sah sebagai referensi analisis potensi siswa.</p>
+        </div>
+      )}
+
       </div> {/* Penutup id="pdf-content" */}
 
       <div className="no-print" style={{ textAlign: 'center', display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '2rem' }}>
