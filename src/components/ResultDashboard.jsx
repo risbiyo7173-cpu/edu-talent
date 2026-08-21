@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { calculateScores, getRecommendations, getNarrative } from '../utils/recommendationEngine';
-import { Trophy, Star, BookOpen, GraduationCap, Briefcase, RefreshCw, Printer, UserCircle2, BrainCircuit } from 'lucide-react';
+import { getPTNDataForMajor } from '../data/ptnData';
+import { Trophy, Star, BookOpen, GraduationCap, Briefcase, RefreshCw, Printer, UserCircle2, BrainCircuit, Target, Building2, Users, Medal } from 'lucide-react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 import html2pdf from 'html2pdf.js';
 
@@ -239,6 +240,62 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                     </div>
                   </div>
                   </div>
+                )}
+
+                {/* === Fitur Khusus RIASEC: Rekomendasi PTN untuk Pilihan 1 === */}
+                {isTop && title.includes("RIASEC") && catNarrative.rekomendasiJurusan && catNarrative.rekomendasiJurusan.length > 0 && (
+                  (() => {
+                    const topMajor = catNarrative.rekomendasiJurusan[0];
+                    const ptnList = getPTNDataForMajor(topMajor);
+                    
+                    if (ptnList) {
+                      return (
+                        <div style={{ display: 'block', width: '100%', marginTop: '2rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
+                          <div style={{ background: isExporting ? 'transparent' : 'rgba(79, 70, 229, 0.05)', border: `1px solid ${isExporting ? '#ccc' : 'var(--primary)'}`, borderRadius: '12px', overflow: 'hidden' }}>
+                            <div style={{ padding: '1rem 1.5rem', background: isExporting ? '#f8f9fa' : 'rgba(79, 70, 229, 0.1)', borderBottom: `1px solid ${isExporting ? '#ccc' : 'rgba(79, 70, 229, 0.2)'}`, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <Building2 size={20} color={isExporting ? '#000' : 'var(--primary)'} />
+                              <h4 style={{ margin: 0, color: isExporting ? '#000' : 'var(--text-primary)', fontSize: '1.05rem' }}>Data Target PTN: {topMajor}</h4>
+                            </div>
+                            <div style={{ padding: '1.5rem' }}>
+                              <p style={{ margin: '0 0 1rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Berdasarkan hasil analisis, berikut adalah referensi Perguruan Tinggi Negeri (PTN) / setara untuk pilihan jurusan utama Anda beserta statistik persaingan 3 tahun terakhir:</p>
+                              
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                {ptnList.map((ptn, ptnIdx) => (
+                                  <div key={ptnIdx} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', padding: '1rem', background: isExporting ? '#fff' : 'rgba(0,0,0,0.2)', border: '1px solid var(--border-light)', borderRadius: '8px' }}>
+                                    <div style={{ flex: '1 1 100%', borderBottom: '1px dashed var(--border-light)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>
+                                      <strong style={{ color: 'var(--text-primary)', fontSize: '1rem' }}>{ptn.univ}</strong>
+                                    </div>
+                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                      <Medal size={16} color="#f59e0b" />
+                                      <div>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Passing Grade</div>
+                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.passingGrade}</div>
+                                      </div>
+                                    </div>
+                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                      <Target size={16} color="#10b981" />
+                                      <div>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Daya Tampung</div>
+                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.dayaTampung} Kursi</div>
+                                      </div>
+                                    </div>
+                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                      <Users size={16} color="#3b82f6" />
+                                      <div>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Rata-rata Peminat</div>
+                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.peminat} Orang</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()
                 )}
 
                 {isTop && catNarrative.trenPekerjaan && (
