@@ -1,3 +1,4 @@
+html { scroll-behavior: smooth; }
 :root {
   /* Premium Dark Theme Core */
   --bg-main: #0B0E14; /* Deep rich black */
