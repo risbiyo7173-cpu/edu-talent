@@ -68,34 +68,6 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     const currentScrollY = window.scrollY;
     window.scrollTo(0, 0);
 
-    // MATEMATIKA HALAMAN: 
-    // Lebar PDF murni = 210mm - 20mm (margin) = 190mm. Lebar DOM = 800px.
-    // Skala = 800 / 190 = 4.2105 px/mm.
-    // Tinggi PDF murni = 297mm - 20mm = 277mm.
-    // Tinggi 1 Halaman di DOM = 277 * 4.2105 = 1166.31 px.
-    const pageHeight = 1166.31;
-    
-    // Cari semua elemen yang HARUS pindah halaman
-    const breakElements = element.querySelectorAll('.force-page-break');
-    const originalMargins = [];
-    
-    breakElements.forEach((el, index) => {
-      originalMargins.push(el.style.marginTop);
-      
-      // Ambil posisi absolut elemen ini relatif terhadap container pdf-content
-      const containerRect = element.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      const absoluteY = elRect.top - containerRect.top;
-      
-      const remainder = absoluteY % pageHeight;
-      // Jika elemen tidak berada di awal halaman (dengan toleransi 20px)
-      if (remainder > 20) {
-        const spaceToFill = pageHeight - remainder;
-        const currentMargin = parseFloat(window.getComputedStyle(el).marginTop) || 0;
-        el.style.marginTop = `${currentMargin + spaceToFill}px`;
-      }
-    });
-
     const opt = {
       margin:       [10, 10, 10, 10], // Margin simetris dalam mm
       filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
@@ -109,16 +81,11 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
         width: 800
       },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: [] } // MATIKAN TOTAL PAGEBREAK BAWAAN YANG BUGGY
+      pagebreak:    { mode: 'avoid-all' }
     };
     
     // Tunggu proses render PDF selesai
     await html2pdf().set(opt).from(element).save();
-    
-    // Restore margin buatan
-    breakElements.forEach((el, index) => {
-      el.style.marginTop = originalMargins[index];
-    });
     
     // Restore semua style
     window.scrollTo(0, currentScrollY);
@@ -169,7 +136,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
     
     return (
       <React.Fragment>
-        <div className={`glass-card ${!isFirst ? 'force-page-break' : ''}`} style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
+        <div className="glass-card" style={{ padding: '2rem', display: 'block', marginBottom: '2rem' }}>
           <div style={{ display: 'block', width: '100%', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
               {icon} {title}
@@ -466,7 +433,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div className="force-page-break" style={{ marginBottom: '3rem' }}>
+      <div style={{ marginBottom: '3rem' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
