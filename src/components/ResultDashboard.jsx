@@ -242,55 +242,66 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
                   </div>
                 )}
 
-                {/* === Fitur Khusus RIASEC: Rekomendasi PTN untuk Pilihan 1 === */}
+                {/* === Fitur Khusus RIASEC: Rekomendasi PTN untuk Pilihan 1, 2, dan 3 === */}
                 {isTop && title.includes("RIASEC") && catNarrative.rekomendasiJurusan && catNarrative.rekomendasiJurusan.length > 0 && (
                   (() => {
-                    const topMajor = catNarrative.rekomendasiJurusan[0];
-                    const ptnList = getPTNDataForMajor(topMajor);
+                    // Cari maksimal 3 jurusan teratas yang ada di database PTN kita
+                    const topMajorsWithPTN = catNarrative.rekomendasiJurusan
+                      .map(major => ({ major, ptnList: getPTNDataForMajor(major) }))
+                      .filter(item => item.ptnList !== null)
+                      .slice(0, 3);
                     
-                    if (ptnList) {
+                    if (topMajorsWithPTN.length > 0) {
                       return (
-                        <div style={{ display: 'block', width: '100%', marginTop: '2rem', pageBreakInside: 'avoid', breakInside: 'avoid' }}>
-                          <div style={{ background: isExporting ? 'transparent' : 'rgba(79, 70, 229, 0.05)', border: `1px solid ${isExporting ? '#ccc' : 'var(--primary)'}`, borderRadius: '12px', overflow: 'hidden' }}>
-                            <div style={{ padding: '1rem 1.5rem', background: isExporting ? '#f8f9fa' : 'rgba(79, 70, 229, 0.1)', borderBottom: `1px solid ${isExporting ? '#ccc' : 'rgba(79, 70, 229, 0.2)'}`, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                              <Building2 size={20} color={isExporting ? '#000' : 'var(--primary)'} />
-                              <h4 style={{ margin: 0, color: isExporting ? '#000' : 'var(--text-primary)', fontSize: '1.05rem' }}>Data Target PTN: {topMajor}</h4>
-                            </div>
-                            <div style={{ padding: '1.5rem' }}>
-                              <p style={{ margin: '0 0 1rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Berdasarkan hasil analisis, berikut adalah referensi Perguruan Tinggi Negeri (PTN) / setara untuk pilihan jurusan utama Anda beserta statistik persaingan 3 tahun terakhir:</p>
-                              
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                {ptnList.map((ptn, ptnIdx) => (
-                                  <div key={ptnIdx} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', padding: '1rem', background: isExporting ? '#fff' : 'rgba(0,0,0,0.2)', border: '1px solid var(--border-light)', borderRadius: '8px' }}>
-                                    <div style={{ flex: '1 1 100%', borderBottom: '1px dashed var(--border-light)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>
-                                      <strong style={{ color: 'var(--text-primary)', fontSize: '1rem' }}>{ptn.univ}</strong>
-                                    </div>
-                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                      <Medal size={16} color="#f59e0b" />
-                                      <div>
-                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Passing Grade</div>
-                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.passingGrade}</div>
+                        <div style={{ display: 'block', width: '100%', marginTop: '2rem' }}>
+                          <h4 style={{ color: 'var(--text-primary)', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', pageBreakAfter: 'avoid', breakAfter: 'avoid' }}>
+                            Data Target Perguruan Tinggi Negeri (3 Pilihan Jurusan Teratas)
+                          </h4>
+                          <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                            Berdasarkan hasil analisis dominan Anda, berikut adalah referensi PTN beserta statistik persaingan (Passing Grade, Daya Tampung, & Rata-rata Peminat 3 Tahun) untuk menunjang strategi SNBP/SNBT Anda:
+                          </p>
+                          
+                          {topMajorsWithPTN.map((item, index) => (
+                            <div key={index} style={{ marginBottom: '1.5rem', pageBreakInside: 'avoid', breakInside: 'avoid', background: isExporting ? 'transparent' : 'rgba(79, 70, 229, 0.05)', border: `1px solid ${isExporting ? '#ccc' : 'var(--primary)'}`, borderRadius: '12px', overflow: 'hidden' }}>
+                              <div style={{ padding: '0.8rem 1.2rem', background: isExporting ? '#f8f9fa' : 'rgba(79, 70, 229, 0.1)', borderBottom: `1px solid ${isExporting ? '#ccc' : 'rgba(79, 70, 229, 0.2)'}`, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <div style={{ background: isExporting ? '#000' : 'var(--primary)', color: 'white', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>{index + 1}</div>
+                                <h4 style={{ margin: 0, color: isExporting ? '#000' : 'var(--text-primary)', fontSize: '1rem' }}>Pilihan {index + 1}: {item.major}</h4>
+                              </div>
+                              <div style={{ padding: '1.2rem' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                  {item.ptnList.map((ptn, ptnIdx) => (
+                                    <div key={ptnIdx} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', padding: '1rem', background: isExporting ? '#fff' : 'rgba(0,0,0,0.2)', border: '1px solid var(--border-light)', borderRadius: '8px' }}>
+                                      <div style={{ flex: '1 1 100%', borderBottom: '1px dashed var(--border-light)', paddingBottom: '0.5rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Building2 size={16} color="var(--text-secondary)" />
+                                        <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.univ}</strong>
+                                      </div>
+                                      <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Medal size={16} color="#f59e0b" />
+                                        <div>
+                                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Passing Grade</div>
+                                          <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>{ptn.passingGrade}</div>
+                                        </div>
+                                      </div>
+                                      <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Target size={16} color="#10b981" />
+                                        <div>
+                                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Daya Tampung</div>
+                                          <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>{ptn.dayaTampung} Kursi</div>
+                                        </div>
+                                      </div>
+                                      <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Users size={16} color="#3b82f6" />
+                                        <div>
+                                          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Rata-rata Peminat</div>
+                                          <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.9rem' }}>{ptn.peminat} Orang</div>
+                                        </div>
                                       </div>
                                     </div>
-                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                      <Target size={16} color="#10b981" />
-                                      <div>
-                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Daya Tampung</div>
-                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.dayaTampung} Kursi</div>
-                                      </div>
-                                    </div>
-                                    <div style={{ flex: '1 1 30%', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                      <Users size={16} color="#3b82f6" />
-                                      <div>
-                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Rata-rata Peminat</div>
-                                        <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ptn.peminat} Orang</div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))}
+                                  ))}
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
                       );
                     }
