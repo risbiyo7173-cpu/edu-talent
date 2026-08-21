@@ -124,7 +124,7 @@ export default function AdminDashboard() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `Data_Peserta_EduTalent_${new Date().getTime()}.csv`);
+    link.setAttribute("download", `Data_Peserta_EduCogni_${new Date().getTime()}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '2rem' }}>
-            <Database color="var(--primary)" /> Dasbor Admin EduTalent
+            <Database color="var(--primary)" /> Dasbor Admin EduCogni
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>Melihat dan mengelola hasil tes seluruh peserta.</p>
         </div>

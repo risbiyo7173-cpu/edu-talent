@@ -344,10 +344,10 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       <div className="flex-responsive" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px double var(--border-light)', paddingBottom: '1.5rem', marginBottom: '3rem', gap: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
           <div style={{ width: '80px', height: '80px', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
-            <img src="/logo.jpg" alt="EduTalent Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="/logo.jpg" alt="EduCogni Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--text-primary)', fontWeight: 'bold' }}>EduTalent Assessment</h2>
+            <h2 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--text-primary)', fontWeight: 'bold' }}>EduCogni Assessment</h2>
             <p style={{ margin: '5px 0 0 0', color: 'var(--secondary)', fontSize: '0.9rem', fontWeight: 'bold', letterSpacing: '2px', textTransform: 'uppercase' }}>Navigasi Potensi & Karir Masa Depan</p>
           </div>
         </div>
@@ -514,7 +514,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       {/* Footer Dokumen Resmi */}
       {isExporting && (
         <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '2px dashed var(--border-light)', textAlign: 'center', color: 'var(--text-muted)' }}>
-          <p style={{ margin: '0 0 5px 0', fontSize: '0.9rem', fontWeight: 'bold' }}>EduTalent Assessment System &copy; {new Date().getFullYear()}</p>
+          <p style={{ margin: '0 0 5px 0', fontSize: '0.9rem', fontWeight: 'bold' }}>EduCogni Assessment System &copy; {new Date().getFullYear()}</p>
           <p style={{ margin: 0, fontSize: '0.8rem' }}>Dokumen ini dihasilkan secara otomatis oleh sistem dan sah sebagai referensi analisis potensi siswa.</p>
         </div>
       )}

@@ -32,7 +32,7 @@ function LandingPage({ onSelectMode }) {
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 5%', background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(255,255,255,0.05)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src="/logo.jpg" alt="Logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
-          <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>Edu<span className="gradient-text">Talent</span></span>
+          <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>Edu<span className="gradient-text">Cogni</span></span>
         </div>
         <div style={{ display: 'flex', gap: '2rem' }}>
           <a href="#beranda" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 'bold' }}>Beranda</a>
@@ -59,7 +59,7 @@ function LandingPage({ onSelectMode }) {
             </h1>
             
             <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: '1.6' }}>
-              EduTalent Assessment adalah platform asesmen cerdas berbasis pakar yang membantu mengidentifikasi kecerdasan dominan, minat bakat, dan merancang *Roadmap Karir* yang paling akurat untuk Anda.
+              EduCogni Assessment adalah platform asesmen cerdas berbasis pakar yang membantu mengidentifikasi kecerdasan dominan, minat bakat, dan merancang *Roadmap Karir* yang paling akurat untuk Anda.
             </p>
             
             <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
@@ -136,7 +136,7 @@ function LandingPage({ onSelectMode }) {
           <div style={{ flex: '1 1 400px' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}><Info color="var(--primary)" /> Tentang Kami</h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '1rem' }}>
-              EduTalent dibangun atas dedikasi untuk membantu generasi muda menemukan potensi sejati mereka. Melalui serangkaian asesmen psikometrik yang diadopsi dari teori-teori pakar dunia (Gardner, Holland, Wechsler), kami menjembatani bakat siswa dengan tuntutan dunia profesional.
+              EduCogni dibangun atas dedikasi untuk membantu generasi muda menemukan potensi sejati mereka. Melalui serangkaian asesmen psikometrik yang diadopsi dari teori-teori pakar dunia (Gardner, Holland, Wechsler), kami menjembatani bakat siswa dengan tuntutan dunia profesional.
             </p>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
               Visi kami adalah memastikan tidak ada siswa yang merasa salah jurusan atau kehilangan arah karir di tengah jalan.
@@ -146,15 +146,15 @@ function LandingPage({ onSelectMode }) {
             <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Hubungi Kami</h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1rem', color: 'var(--text-secondary)' }}>
               <MapPin size={18} color="var(--accent)" />
-              <span>Gedung EduTalent Lt. 3<br/>Jl. Pendidikan No. 123, Jakarta</span>
+              <span>Green Park Regency, Cluster Tulip N 4, Sidoarjo</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1rem', color: 'var(--text-secondary)' }}>
               <Mail size={18} color="var(--accent)" />
-              <span>halo@edutalent.sch.id</span>
+              <span>halo@educogni.id</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'var(--text-secondary)' }}>
               <Phone size={18} color="var(--accent)" />
-              <span>(021) 555-1234</span>
+              <span>(+62) 822 3301 3271</span>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ function LandingPage({ onSelectMode }) {
       {/* Footer */}
       <footer style={{ textAlign: 'center', padding: '2rem', background: 'rgba(0,0,0,0.3)', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'relative' }}>
         <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-          &copy; {new Date().getFullYear()} EduTalent Assessment System - Seluruh Hak Cipta Dilindungi
+          &copy; {new Date().getFullYear()} EduCogni Assessment System - Seluruh Hak Cipta Dilindungi
         </span>
         
         {/* Secret Admin Button */}
