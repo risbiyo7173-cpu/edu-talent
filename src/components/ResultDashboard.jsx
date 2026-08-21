@@ -391,7 +391,7 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
       </div>
 
       {/* Rincian Skor */}
-      <div style={{ marginBottom: '3rem' }}>
+      <div style={{ marginBottom: '3rem', pageBreakBefore: 'always', breakBefore: 'page' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Analisis Pakar & Pemetaan</h2>
         <div className="radar-grid-container" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
