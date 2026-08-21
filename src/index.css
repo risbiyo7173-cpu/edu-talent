@@ -322,12 +322,13 @@ select.input-field option {
   display: block !important;
 }
 
-.pdf-export-mode .highlights-container {
-  display: block !important;
+/* Hilangkan border dan background dari Roadmap Container agar tidak terlihat terpotong di PDF */
+.pdf-export-mode .roadmap-container {
   background: transparent !important;
   border: none !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Force page breaks to be respected */
