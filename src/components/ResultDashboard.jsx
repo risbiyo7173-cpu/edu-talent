@@ -35,69 +35,27 @@ export default function ResultDashboard({ userData, testResults, selectedMode, o
   }, [userData, testResults, navigate, selectedMode, onClose, initialAnalysis]);
 
   const handleDownloadPDF = async () => {
-    const element = document.getElementById('pdf-content');
-    const container = element.closest('.container');
-    
-    // Simpan style asli
-    const originalWidth = element.style.width;
-    const originalMaxWidth = element.style.maxWidth;
-    const originalMargin = element.style.margin;
-    const originalContainerMargin = container ? container.style.margin : '';
-    const originalContainerPadding = container ? container.style.padding : '';
-    
-    // RESET TOTAL semua offset (margin & padding) dari layar.
-    // html2canvas punya bug di mana ia ikut merekam margin/padding layar 
-    // sehingga PDF menjadi bergeser ke kiri atau kanan.
-    if (container) {
-      container.style.margin = '0';
-      container.style.padding = '0';
-    }
-
-    // Set fixed width 800px (ukuran optimal untuk A4)
-    element.style.width = '800px';
-    element.style.maxWidth = '800px';
-    element.style.margin = '0';
-    element.classList.add('pdf-export-mode');
-
     setIsExporting(true);
     
-    // Tunggu 500ms agar DOM stabil dan grafik Recharts selesai me-resize
+    // Ambil elemen root
+    const element = document.getElementById('pdf-content');
+    if (!element) {
+      setIsExporting(false);
+      return;
+    }
+
+    // Tambahkan class khusus export
+    element.classList.add('pdf-export-mode');
+
+    // Tunggu komponen mekar sempurna (ukuran SVG absolut, dll)
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Scroll paksa ke paling atas agar viewport html2canvas sejajar dengan elemen
-    const currentScrollY = window.scrollY;
-    window.scrollTo(0, 0);
+    // Buka dialog print bawaan browser (Save as PDF)
+    // Mesin native browser 100% sempurna membaca page-break-inside: avoid
+    window.print();
 
-    const opt = {
-      margin:       [10, 10, 10, 10], // Margin simetris dalam mm
-      filename:     `Laporan_EduTalent_${userData.name.replace(/\s+/g, '_')}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { 
-        scale: 2, 
-        useCORS: true, 
-        logging: false, 
-        backgroundColor: '#ffffff',
-        windowWidth: 800, 
-        width: 800
-      },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: 'avoid-all' }
-    };
-    
-    // Tunggu proses render PDF selesai
-    await html2pdf().set(opt).from(element).save();
-    
-    // Restore semua style
-    window.scrollTo(0, currentScrollY);
+    // Restore state
     element.classList.remove('pdf-export-mode');
-    element.style.width = originalWidth;
-    element.style.maxWidth = originalMaxWidth;
-    element.style.margin = originalMargin;
-    if (container) {
-      container.style.margin = originalContainerMargin;
-      container.style.padding = originalContainerPadding;
-    }
-    
     setIsExporting(false);
   };
 
