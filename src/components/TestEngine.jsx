@@ -113,8 +113,8 @@ export default function TestEngine({ selectedMode, onComplete }) {
     return (
       <div className="container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
         <div className="glass-panel animate-fade-in" style={{ padding: '3rem', maxWidth: '500px', textAlign: 'center' }}>
-          <div className="spin-animation" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', border: '2px dashed var(--secondary)', marginBottom: '2rem' }}>
-            <BrainCircuit size={40} color="var(--secondary)" />
+          <div className="spin-animation" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', border: '2px dashed var(--secondary)', marginBottom: '2rem', overflow: 'hidden' }}>
+            <img src="/logo.jpg" alt="EduTalent Logo" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }} />
           </div>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Memproses Data Anda...</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>
